@@ -46,42 +46,35 @@ export default class MyGame extends Phaser.Scene
 
     var seal = this.add.follower(curve, 200, 200, 'seal');
     seal.scale = 0.3
+    // seal.rotation = Math.PI/2
+
+    // var trickSeal = this.add.follower(curve, 200, 200, 'seal');
+    // be invisible most of the time and visible during tricks
+
+
 
     seal.startFollow({
         duration: 2000,
         yoyo: true,
         // onYoyo: flip,
         repeat: -1,
-        onYoyo: () => { addEvent('onYoyo') },
+        onYoyo: doTrick,
+        onRepeat: doTrick,
         rotateToPath: true
     });
 
-    const tween = this.tweens.add({
-        targets: seal,
-        props: {
-            x: {
-                value: 600,
-                delay: 1000
-            }
-        },
-        ease: 'Power1',
-        duration: 3000,
-        yoyo: true,
-        paused: true,
-        onActive: function () { addEvent('onActive') },
-        onStart: function () { addEvent('onStart') },
-        onLoop: function () { addEvent('onLoop') },
-        onYoyo: function () { addEvent('onYoyo') },
-        onRepeat: function () { addEvent('onRepeat') },
-        onComplete: function () { addEvent('onComplete') }
-    });
+    function doTrick() {
+        seal.rotation += Math.PI
+        seal.toggleFlipY()
+        seal.pauseFollow()
+    }
 
-    function onYoyoHandler (tween, target)
-{
-    console.log(arguments);
+//     function onYoyoHandler (tween, target)
+// {
+//     console.log(arguments);
 
-    target.toggleFlipX().setAlpha(0.2 + Math.random());
-}
+//     target.toggleFlipX().setAlpha(0.2 + Math.random());
+// }
 
     this.input.on('pointerdown', function () {
 
