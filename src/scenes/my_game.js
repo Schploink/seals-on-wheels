@@ -64,17 +64,13 @@ export default class MyGame extends Phaser.Scene
     });
 
     function doTrick() {
+        isDoingTrick = true;
         seal.rotation += Math.PI
         seal.toggleFlipY()
         seal.pauseFollow()
+
+        // isDoingTrick = false;
     }
-
-//     function onYoyoHandler (tween, target)
-// {
-//     console.log(arguments);
-
-//     target.toggleFlipX().setAlpha(0.2 + Math.random());
-// }
 
     this.input.on('pointerdown', function () {
 
@@ -88,5 +84,38 @@ export default class MyGame extends Phaser.Scene
         }
 
     });
+
+    // TODO: XYZ should be 'keydown' or something idk
+    // function doAction0() {
+    //     // figure out a way to spin & rotate & stretch seal somehow
+    //     seal...
+    // }
+    // function doAction1() {
+    //     // figure out a way to spin & rotate & stretch seal somehow
+    //     seal...
+    // }
+    // let actionWords =['abcd', 'efgh', ...];
+    // let accumulatorString = '';
+    // let isDoingTrick = false;
+    // this.input.on('XYZ', function (event) {
+    //     if (isDoingTrick) {
+            // 
+            // 
+            // event --> letter ('a', 'b',)
+            // letter = ...
+
+            // accumulatorString += letter
+            /* 
+            might be .equals() instead of ===
+            if (accumulatorString === actionWords[0]) {
+            doAction0();  
+            } else if(accumulatorString === actionWords[1]) {
+            doAction1();
+            } ...
+            */
+    //     }
+
+    // });
+
     }
 }
