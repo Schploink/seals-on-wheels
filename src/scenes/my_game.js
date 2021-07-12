@@ -5,19 +5,17 @@ import halfPipe from '../assets/79-skate-or-die-dos-screenshot-half-pipe-stunts.
 
 export default class MyGame extends Phaser.Scene
 {
-    constructor ()
-    {
+    constructor () {
         super();
     }
 
-    preload ()
-    {
+    preload () {
         this.load.image('seal', sealImg);
         this.load.image('logo', logoImg);
         this.load.image('halfpipe', halfPipe)
     }   
-    create ()
-{
+
+    create () {
     var points = [];
 
     const halfPipe = this.add.image(400, 300, 'halfpipe')
@@ -47,13 +45,14 @@ export default class MyGame extends Phaser.Scene
 
     var seal = this.add.follower(curve, 200, 200, 'seal');
     seal.scale = 0.3
-    // seal.flipY = true
-    // seal.rotation = Math.PI/2
 
-    var trickSeal = this.add.follower(curve, 200, 200, 'seal');
+
+    var trickSeal = this.add.follower(curve, 600, 200, 'seal');
     trickSeal.scale = 0.3
+    trickSeal.rotation = Math.PI/2
+    trickSeal.toggleFlipY()
+    trickSeal.toggleFlipX()
     trickSeal.visible = false
-    // be invisible most of the time and visible during tricks
 
 
 
@@ -86,11 +85,11 @@ export default class MyGame extends Phaser.Scene
     function doYoyoTrick() {
         // seal.visible = false
         // trickSeal.visible = true
-        // let isDoingTrick = true;
+        // setInterval(() => {trickSeal.rotation += .1}, 10)
         seal.rotation += Math.PI
         seal.toggleFlipY()
         seal.pauseFollow()
-        // seal.visible = true
+        // let isDoingTrick = true;
         // isDoingTrick = false;
     }
 
@@ -140,4 +139,5 @@ export default class MyGame extends Phaser.Scene
     // });
 
     }
+
 }
