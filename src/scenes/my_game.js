@@ -32,6 +32,11 @@ export default class MyGame extends Phaser.Scene
     var curve = new Phaser.Curves.Spline(points);
 
     var graphics = this.add.graphics();
+    
+    for (var i = 0; i < points.length; i++)
+    {
+        graphics.fillCircle(points[i].x, points[i].y, 4);
+    }
 
     // graphics.lineStyle(1, 0xffffff, 1);
 
@@ -39,13 +44,10 @@ export default class MyGame extends Phaser.Scene
 
     // graphics.fillStyle(0x00ff00, 1);
 
-    for (var i = 0; i < points.length; i++)
-    {
-        graphics.fillCircle(points[i].x, points[i].y, 4);
-    }
 
     var seal = this.add.follower(curve, 200, 200, 'seal');
     seal.scale = 0.3
+    // seal.flipY = true
     // seal.rotation = Math.PI/2
 
     // var trickSeal = this.add.follower(curve, 200, 200, 'seal');
@@ -58,14 +60,20 @@ export default class MyGame extends Phaser.Scene
         yoyo: true,
         // onYoyo: flip,
         repeat: -1,
-        onYoyo: doTrick,
-        onRepeat: doTrick,
+        onYoyo: doYoyoTrick,
+        onRepeat: doYoyoTrick,
         rotateToPath: true
     });
 
-    function doTrick() {
-        isDoingTrick = true;
-        seal.rotation += Math.PI
+    // function doReturnTrick() {
+    //     seal.rotation += Math.PI/2
+    //     seal.toggleFlipY()
+    //     seal.pauseFollow()
+    // }
+
+    function doYoyoTrick() {
+        // let isDoingTrick = true;
+        // seal.rotation += Math.PI/2
         seal.toggleFlipY()
         seal.pauseFollow()
 
