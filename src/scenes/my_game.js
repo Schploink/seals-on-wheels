@@ -50,7 +50,9 @@ export default class MyGame extends Phaser.Scene
     // seal.flipY = true
     // seal.rotation = Math.PI/2
 
-    // var trickSeal = this.add.follower(curve, 200, 200, 'seal');
+    var trickSeal = this.add.follower(curve, 200, 200, 'seal');
+    trickSeal.scale = 0.3
+    trickSeal.visible = false
     // be invisible most of the time and visible during tricks
 
 
@@ -65,6 +67,16 @@ export default class MyGame extends Phaser.Scene
         rotateToPath: true
     });
 
+    // trickSeal.startFollow({
+    //     duration: 2000,
+    //     yoyo: true,
+    //     // onYoyo: flip,
+    //     repeat: -1,
+    //     onYoyo: doYoyoTrick,
+    //     onRepeat: doYoyoTrick,
+    //     rotateToPath: true
+    // });
+
     // function doReturnTrick() {
     //     seal.rotation += Math.PI/2
     //     seal.toggleFlipY()
@@ -72,11 +84,13 @@ export default class MyGame extends Phaser.Scene
     // }
 
     function doYoyoTrick() {
+        // seal.visible = false
+        // trickSeal.visible = true
         // let isDoingTrick = true;
-        // seal.rotation += Math.PI/2
+        seal.rotation += Math.PI
         seal.toggleFlipY()
         seal.pauseFollow()
-
+        // seal.visible = true
         // isDoingTrick = false;
     }
 
