@@ -20,12 +20,14 @@ export default class MyGame extends Phaser.Scene
 
     const halfPipe = this.add.image(400, 300, 'halfpipe')
     halfPipe.scale = 1.5
-
+    
+    // points.push(new Phaser.Math.Vector2(200, 150));
     points.push(new Phaser.Math.Vector2(200, 200));
     points.push(new Phaser.Math.Vector2(250, 300));
     points.push(new Phaser.Math.Vector2(400, 350));
     points.push(new Phaser.Math.Vector2(550, 300));
     points.push(new Phaser.Math.Vector2(600, 200));
+    // points.push(new Phaser.Math.Vector2(600, 150));
 
     var curve = new Phaser.Curves.Spline(points);
 
@@ -43,11 +45,11 @@ export default class MyGame extends Phaser.Scene
     // graphics.fillStyle(0x00ff00, 1);
 
 
-    var seal = this.add.follower(curve, 200, 200, 'seal');
+    let seal = this.add.follower(curve, 200, 200, 'seal');
     seal.scale = 0.3
 
 
-    var trickSeal = this.add.follower(curve, 600, 200, 'seal');
+    let trickSeal = this.add.follower(curve, 600, 200, 'seal');
     trickSeal.scale = 0.3
     trickSeal.rotation = Math.PI/2
     trickSeal.toggleFlipY()
@@ -59,7 +61,7 @@ export default class MyGame extends Phaser.Scene
     seal.startFollow({
         duration: 2000,
         yoyo: true,
-        // onYoyo: flip,
+        ease: "Sine.easeInOut",
         repeat: -1,
         onYoyo: doYoyoTrick,
         onRepeat: doYoyoTrick,
@@ -76,16 +78,31 @@ export default class MyGame extends Phaser.Scene
     //     rotateToPath: true
     // });
 
-    // function doReturnTrick() {
-    //     seal.rotation += Math.PI/2
-    //     seal.toggleFlipY()
-    //     seal.pauseFollow()
-    // }
+    let tween = this.tweens.add({
+        targets: trickSeal,
+        scale: 2,
+        duration: 750,
+        ease: 'Power2',
+        yoyo: true,
+        repeat: 1,
+        paused: true
+    });
 
     function doYoyoTrick() {
+
+
+        // Trick seal rotation
         // seal.visible = false
         // trickSeal.visible = true
-        // setInterval(() => {trickSeal.rotation += .1}, 10)
+        // setInterval(() => {trickSeal.rotation += .02}, 10)
+
+        // Cheap seal scale
+        // seal.visible = false
+        // trickSeal.visible = true
+        // tween.resume()
+        // setInterval(() => {trickSeal.scale += .02}, 10)
+        
+
         seal.rotation += Math.PI
         seal.toggleFlipY()
         seal.pauseFollow()
