@@ -38,6 +38,8 @@ export default class MyGame extends Phaser.Scene
         graphics.fillCircle(points[i].x, points[i].y, 4);
     }
 
+    // Display path curve
+
     // graphics.lineStyle(1, 0xffffff, 1);
 
     // curve.draw(graphics, 64);
@@ -88,6 +90,15 @@ export default class MyGame extends Phaser.Scene
         paused: true
     });
 
+    function beginTrick() {
+        let trick
+        if ( trick = true ) {
+
+        } else {
+            
+        }
+    }
+
     function doYoyoTrick() {
 
 
@@ -118,6 +129,8 @@ export default class MyGame extends Phaser.Scene
         }
         else
         {
+            trickSeal.visible = false
+            seal.visible = true
             seal.resumeFollow();
         }
 
