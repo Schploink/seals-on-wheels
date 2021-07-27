@@ -51,26 +51,32 @@ export default class MyGame extends Phaser.Scene
     seal.scale = 0.3
 
 
-    let trickSeal = this.add.follower(curve, 600, 200, 'seal');
-    trickSeal.scale = 0.3
-    trickSeal.rotation = Math.PI/2
-    trickSeal.toggleFlipY()
-    trickSeal.toggleFlipX()
-    trickSeal.visible = false
+    let trickSealRight = this.add.follower(curve, 600, 200, 'seal');
+    trickSealRight.scale = 0.3
+    trickSealRight.rotation = Math.PI/2
+    trickSealRight.toggleFlipY()
+    trickSealRight.toggleFlipX()
+    trickSealRight.visible = false
 
+    let trickSealLeft = this.add.follower(curve, 200, 200, 'seal');
+    trickSealLeft.scale = 0.3
+    trickSealLeft.rotation = Math.PI/2
+    trickSealLeft.toggleFlipY()
+    trickSealLeft.toggleFlipX()
+    trickSealLeft.visible = false
 
 
     seal.startFollow({
         duration: 2000,
         yoyo: true,
         ease: "Sine.easeInOut",
-        repeat: -1,
+        repeat: 4,
         onYoyo: doYoyoTrick,
         onRepeat: doYoyoTrick,
         rotateToPath: true
     });
 
-    // trickSeal.startFollow({
+    // trickSealRight.startFollow({
     //     duration: 2000,
     //     yoyo: true,
     //     // onYoyo: flip,
@@ -80,8 +86,8 @@ export default class MyGame extends Phaser.Scene
     //     rotateToPath: true
     // });
 
-    let tween = this.tweens.add({
-        targets: trickSeal,
+    let tweenBounce = this.tweens.add({
+        targets: [ trickSealRight, trickSealLeft ],
         scale: 2,
         duration: 750,
         ease: 'Power2',
@@ -92,34 +98,38 @@ export default class MyGame extends Phaser.Scene
 
     function beginTrick() {
         let trick
+
+        // function where input success or fail sets trick to true or false
+
         if ( trick = true ) {
 
+            // show success, perform trick, increase score, decrease pass count
+
+            // Trick seal rotation
+            // seal.visible = false
+            // trickSealRight.visible = true
+            // setInterval(() => {trickSealRight.rotation += .02}, 10)
+    
+            // Cheap seal scale
+            // seal.visible = false
+            // trickSealRight.visible = true
+            // tweenBounce.resume()
+            // setInterval(() => {trickSealRight.scale += .02}, 10)
+
         } else {
-            
+            // show failure, decrease pass count
         }
     }
 
     function doYoyoTrick() {
 
-
-        // Trick seal rotation
-        // seal.visible = false
-        // trickSeal.visible = true
-        // setInterval(() => {trickSeal.rotation += .02}, 10)
-
-        // Cheap seal scale
-        // seal.visible = false
-        // trickSeal.visible = true
-        // tween.resume()
-        // setInterval(() => {trickSeal.scale += .02}, 10)
-        
-
         seal.rotation += Math.PI
         seal.toggleFlipY()
         seal.pauseFollow()
-        // let isDoingTrick = true;
-        // isDoingTrick = false;
     }
+
+
+        
 
     this.input.on('pointerdown', function () {
 
@@ -129,8 +139,8 @@ export default class MyGame extends Phaser.Scene
         }
         else
         {
-            trickSeal.visible = false
-            seal.visible = true
+            // trickSealRight.visible = false
+            // seal.visible = true
             seal.resumeFollow();
         }
 
