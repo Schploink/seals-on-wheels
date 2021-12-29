@@ -137,6 +137,9 @@ export default class MyGame extends Phaser.Scene
         return words[Math.floor(Math.random() * words.length)]
     }
         
+    function gameOver() {
+        
+    }
 
     this.input.on('pointerdown', function () {
 
