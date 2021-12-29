@@ -3,14 +3,13 @@ import logoImg from '../assets/logo.png';
 import sealImg from '../assets/Sealonwheels.png';
 import halfPipe from '../assets/79-skate-or-die-dos-screenshot-half-pipe-stunts.png'
 
-const words = []
 
 export default class MyGame extends Phaser.Scene
 {
     constructor () {
         super();
     }
-
+    
     preload () {
         this.load.image('seal', sealImg);
         this.load.image('logo', logoImg);
@@ -48,6 +47,7 @@ export default class MyGame extends Phaser.Scene
 
     // graphics.fillStyle(0x00ff00, 1);
 
+    let words = []
 
     let seal = this.add.follower(curve, 200, 200, 'seal');
     seal.scale = 0.3
@@ -133,6 +133,9 @@ export default class MyGame extends Phaser.Scene
     }
 
 
+    function getWord() {
+        return words[Math.floor(Math.random() * words.length)]
+    }
         
 
     this.input.on('pointerdown', function () {
