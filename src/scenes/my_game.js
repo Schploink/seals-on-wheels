@@ -3,6 +3,8 @@ import logoImg from '../assets/logo.png';
 import sealImg from '../assets/Sealonwheels.png';
 import halfPipe from '../assets/79-skate-or-die-dos-screenshot-half-pipe-stunts.png'
 
+const words = []
+
 export default class MyGame extends Phaser.Scene
 {
     constructor () {
@@ -96,6 +98,8 @@ export default class MyGame extends Phaser.Scene
         paused: true
     });
 
+
+    // conditional result based on 
     function beginTrick() {
         let trick
 
