@@ -158,14 +158,9 @@ export default class MyGame extends Phaser.Scene
 
     });
 
-    // TODO: XYZ should be 'keydown' or something idk
     // function doAction0() {
-    //     // figure out a way to spin & rotate & stretch seal somehow
-    //     seal...
     // }
     // function doAction1() {
-    //     // figure out a way to spin & rotate & stretch seal somehow
-    //     seal...
     // }
     // let actionWords =['abcd', 'efgh', ...];
     // let accumulatorString = '';
