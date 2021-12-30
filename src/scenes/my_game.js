@@ -47,7 +47,9 @@ export default class MyGame extends Phaser.Scene
 
     // graphics.fillStyle(0x00ff00, 1);
 
-    let words = []
+    let words = [ "thing", "pizza", "hecks", "signs", "candy", "loops", "spout",
+        "havok", "radical", "bogus", "tubular", "bodacious", "rightous", "skater", "awesome",
+        "cowabunga", "hella", "indie", "skate", "seals", "roundboi", "fishes", "beaches"]
 
     let seal = this.add.follower(curve, 200, 200, 'seal');
     seal.scale = 0.3
@@ -138,7 +140,7 @@ export default class MyGame extends Phaser.Scene
     }
         
     function gameOver() {
-        
+
     }
 
     this.input.on('pointerdown', function () {
