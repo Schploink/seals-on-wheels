@@ -100,7 +100,6 @@ export default class MyGame extends Phaser.Scene
         paused: true
     });
 
-    // display points
     // conditional result based on 
     function beginTrick() {
         let trick
