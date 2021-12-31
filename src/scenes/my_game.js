@@ -49,7 +49,7 @@ export default class MyGame extends Phaser.Scene
 
     let words = [ "thing", "pizza", "hecks", "signs", "candy", "loops", "spout",
         "havok", "radical", "bogus", "tubular", "bodacious", "rightous", "skater", "awesome",
-        "cowabunga", "hella", "indie", "skate", "seals", "roundboi", "fishes", "beaches", "seagull"]
+        "cowabunga", "hella", "indie", "skate", "seals", "roundboi", "fishes", "beaches", "seagull", "bingo"]
 
     let seal = this.add.follower(curve, 200, 200, 'seal');
     seal.scale = 0.3
