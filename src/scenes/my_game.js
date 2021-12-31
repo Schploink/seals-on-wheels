@@ -39,7 +39,7 @@ export default class MyGame extends Phaser.Scene
         graphics.fillCircle(points[i].x, points[i].y, 4);
     }
 
-    // Display path curve
+    // Display path curve 
 
     // graphics.lineStyle(1, 0xffffff, 1);
 
@@ -100,7 +100,7 @@ export default class MyGame extends Phaser.Scene
         paused: true
     });
 
-
+    // display points
     // conditional result based on 
     function beginTrick() {
         let trick
