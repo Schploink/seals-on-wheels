@@ -100,7 +100,7 @@ export default class MyGame extends Phaser.Scene
         paused: true
     });
 
-    // conditional result based on 
+
     function beginTrick() {
         let trick
 
