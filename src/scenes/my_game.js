@@ -49,7 +49,8 @@ export default class MyGame extends Phaser.Scene
 
     let words = [ "thing", "pizza", "hecks", "signs", "candy", "loops", "spout",
         "havok", "radical", "bogus", "tubular", "bodacious", "rightous", "skater", "awesome",
-        "cowabunga", "hella", "indie", "skate", "seals", "roundboi", "fishes", "beaches", "seagull", "bingo"]
+        "cowabunga", "hella", "indie", "skate", "seals", "roundboi", "fishes", "beaches",
+        "seagull", "bingo", "hang ten", "shaka", "skate or die"]
 
     let seal = this.add.follower(curve, 200, 200, 'seal');
     seal.scale = 0.3
@@ -101,14 +102,69 @@ export default class MyGame extends Phaser.Scene
     });
 
 
+    
+    function doYoyoTrick() {
+        
+        seal.rotation += Math.PI
+        seal.toggleFlipY()
+        seal.pauseFollow()
+        beginTrick()
+    }
+    
+    let matchWord 
+    let score = 0
+    let scoreText
+    scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#FFFFFF'})
+    let passes = 6
+    let passText
+    passText = this.add.text(16, 50, 'Remaining Passes: 6', { fontSize: '32px', fill: '#FFFFFF'})
+    let timer = 0
+    
+    function getWord() {
+        return words[Math.floor(Math.random() * words.length)]
+    }
+    
+    function addMatchWord() {
+        matchWord = getword()
+    }
+    
+    function updateScore() {
+        score++
+        scoreText.setText('Score: ' + score)
+    }
 
+    function updatePasses() {
+        passes -= 1
+        passText.setText('Remaining Passes: ' + passes)
+    }
+    
+    function gameOver() {
+        
+    }
+    
+    this.input.on('pointerdown', function () {
+        
+        if (seal.isFollowing())
+        {
+            seal.pauseFollow();
+        }
+        else
+        {
+            // trickSealRight.visible = false
+            // seal.visible = true
+            seal.resumeFollow();
+        }
+        
+    });
+
+    // conditional result based on 
     function beginTrick() {
-        let trick
-
+        let trick = true
+        updatePasses()
         // function where input success or fail sets trick to true or false
 
         if ( trick = true ) {
-
+            updateScore()
             // show success, perform trick, increase score, decrease pass count
 
             // Trick seal rotation
@@ -126,48 +182,17 @@ export default class MyGame extends Phaser.Scene
             // show failure, decrease pass count
         }
     }
-
-    function doYoyoTrick() {
-
-        seal.rotation += Math.PI
-        seal.toggleFlipY()
-        seal.pauseFollow()
-    }
-
-
-    function getWord() {
-        return words[Math.floor(Math.random() * words.length)]
-    }
-        
-    function gameOver() {
-
-    }
-
-    this.input.on('pointerdown', function () {
-
-        if (seal.isFollowing())
-        {
-            seal.pauseFollow();
-        }
-        else
-        {
-            // trickSealRight.visible = false
-            // seal.visible = true
-            seal.resumeFollow();
-        }
-
-    });
-
+    
     // function doAction0() {
-    // }
-    // function doAction1() {
-    // }
-    // let actionWords =['abcd', 'efgh', ...];
-    // let accumulatorString = '';
-    // let isDoingTrick = false;
-    // this.input.on('XYZ', function (event) {
-    //     if (isDoingTrick) {
-            // 
+        // }
+        // function doAction1() {
+            // }
+            // let actionWords =['abcd', 'efgh', ...];
+            // let accumulatorString = '';
+            // let isDoingTrick = false;
+            // this.input.on('XYZ', function (event) {
+                //     if (isDoingTrick) {
+                    // 
             // 
             // event --> letter ('a', 'b',)
             // letter = ...
