@@ -114,11 +114,12 @@ export default class MyGame extends Phaser.Scene
     let matchWord 
     let score = 0
     let scoreText
-    scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', fill: '#FFFFFF'})
+    scoreText = this.add.text(16, 16, 'Score: 0', { fontFamily: "spraypaint", fontSize: '32px', fill: '#FFFFFF'})
     let passes = 6
     let passText
-    passText = this.add.text(16, 50, 'Remaining Passes: 6', { fontSize: '32px', fill: '#FFFFFF'})
-    let timer = 0
+    passText = this.add.text(16, 50, 'Remaining Passes: 6', { fontFamily: "spraypaint", fontSize: '32px', fill: '#FFFFFF'})
+    let timer = 0.0
+    let timerText = this.add.text(16, 84, 'Timer: 0', { fontFamily: "spraypaint", fontSize: '32px', fill: '#FFFFFF'})
     
     function getWord() {
         return words[Math.floor(Math.random() * words.length)]
@@ -139,7 +140,9 @@ export default class MyGame extends Phaser.Scene
     }
     
     function gameOver() {
-        
+        if (passes === 0) {
+            
+        }
     }
     
     this.input.on('pointerdown', function () {
@@ -168,9 +171,13 @@ export default class MyGame extends Phaser.Scene
             // show success, perform trick, increase score, decrease pass count
 
             // Trick seal rotation
-            // seal.visible = false
-            // trickSealRight.visible = true
-            // setInterval(() => {trickSealRight.rotation += .02}, 10)
+            seal.visible = false
+            trickSealRight.visible = true
+            setInterval(() => {trickSealRight.rotation += .04}, 10)
+            setInterval(() => {
+                trickSealRight.visible = false
+                seal.visible = true
+            }, 2000)
     
             // Cheap seal scale
             // seal.visible = false
