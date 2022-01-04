@@ -120,13 +120,16 @@ export default class MyGame extends Phaser.Scene
     passText = this.add.text(16, 50, 'Remaining Passes: 6', { fontFamily: "spraypaint", fontSize: '32px', fill: '#FFFFFF'})
     let timer = 0.0
     let timerText = this.add.text(16, 84, 'Timer: 0', { fontFamily: "spraypaint", fontSize: '32px', fill: '#FFFFFF'})
+    let instructionText = this.add.text(150, 500, "Type the word that appears in the top right below", {fontFamily: "spray", fontSize: "24px"})
+    let matchText = this.add.text(450, 50, "match word that appears here", {fontFamily: "spray", fontSize: "24px"})
+    
     
     function getWord() {
         return words[Math.floor(Math.random() * words.length)]
     }
     
     function addMatchWord() {
-        matchWord = getword()
+        matchText.setText( getWord()  )
     }
     
     function updateScore() {
@@ -141,7 +144,7 @@ export default class MyGame extends Phaser.Scene
     
     function gameOver() {
         if (passes === 0) {
-            
+
         }
     }
     
@@ -165,7 +168,7 @@ export default class MyGame extends Phaser.Scene
         let trick = true
         updatePasses()
         // function where input success or fail sets trick to true or false
-
+        addMatchWord()
         if ( trick = true ) {
             updateScore()
             // show success, perform trick, increase score, decrease pass count
