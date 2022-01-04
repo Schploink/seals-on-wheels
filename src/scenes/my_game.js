@@ -66,7 +66,7 @@ export default class MyGame extends Phaser.Scene
     let trickSealLeft = this.add.follower(curve, 200, 200, 'seal');
     trickSealLeft.scale = 0.3
     trickSealLeft.rotation = Math.PI/2
-    trickSealLeft.toggleFlipY()
+    // trickSealLeft.toggleFlipY()
     trickSealLeft.toggleFlipX()
     trickSealLeft.visible = false
 
@@ -97,7 +97,7 @@ export default class MyGame extends Phaser.Scene
         duration: 750,
         ease: 'Power2',
         yoyo: true,
-        repeat: 1,
+        repeat: true,
         paused: true
     });
 
@@ -111,25 +111,29 @@ export default class MyGame extends Phaser.Scene
         beginTrick()
     }
     
-    let matchWord 
+    
     let score = 0
     let scoreText
-    scoreText = this.add.text(16, 16, 'Score: 0', { fontFamily: "spraypaint", fontSize: '32px', fill: '#FFFFFF'})
+    scoreText = this.add.text(16, 16, 'Score: 0', { fontFamily: "spray", fontSize: '32px', fill: '#FFFFFF'})
     let passes = 6
     let passText
-    passText = this.add.text(16, 50, 'Remaining Passes: 6', { fontFamily: "spraypaint", fontSize: '32px', fill: '#FFFFFF'})
-    let timer = 0.0
-    let timerText = this.add.text(16, 84, 'Timer: 0', { fontFamily: "spraypaint", fontSize: '32px', fill: '#FFFFFF'})
+    passText = this.add.text(16, 50, 'Remaining Passes: 6', { fontFamily: "spray", fontSize: '32px', fill: '#FFFFFF'})
+    let timer = 3.0
+    let timerText = this.add.text(16, 84, 'Timer: 3.0', { fontFamily: "spray", fontSize: '32px', fill: '#FFFFFF'})
     let instructionText = this.add.text(150, 500, "Type the word that appears in the top right below", {fontFamily: "spray", fontSize: "24px"})
-    let matchText = this.add.text(450, 50, "match word that appears here", {fontFamily: "spray", fontSize: "24px"})
-    
+    let matchTextInstruction = this.add.text(400, 50, "match the word that appears here", {fontFamily: "spray", fontSize: "24px"})
+    let matchWord = this.add.text(500, 50, "", {fontFamily: "spray", fontSize: "48px"})
+    let matchText
+    let trick
     
     function getWord() {
         return words[Math.floor(Math.random() * words.length)]
     }
     
     function addMatchWord() {
-        matchText.setText( getWord()  )
+        matchTextInstruction.setText( "" )
+        matchText = getWord()
+        matchWord.setText( matchText )
     }
     
     function updateScore() {
@@ -163,10 +167,19 @@ export default class MyGame extends Phaser.Scene
         
     });
 
-    // conditional result based on 
+    text = document.getElementById("matchtext")
+    text.focus()
+    text.addEventListener("input", (e) => {
+        const insertedText = e.target.value;
+        if (insertedText === matchText) {
+
+        e.target.value = "";
+        }
+    });
+
+// conditional result based on 
     function beginTrick() {
-        let trick = true
-        updatePasses()
+        trick = true
         // function where input success or fail sets trick to true or false
         addMatchWord()
         if ( trick = true ) {
@@ -174,51 +187,28 @@ export default class MyGame extends Phaser.Scene
             // show success, perform trick, increase score, decrease pass count
 
             // Trick seal rotation
-            seal.visible = false
-            trickSealRight.visible = true
-            setInterval(() => {trickSealRight.rotation += .04}, 10)
-            setInterval(() => {
-                trickSealRight.visible = false
-                seal.visible = true
-            }, 2000)
-    
-            // Cheap seal scale
             // seal.visible = false
             // trickSealRight.visible = true
-            // tweenBounce.resume()
+            // setInterval(() => {trickSealRight.rotation += .04}, 10)
+            // setInterval(() => {
+            //     trickSealRight.visible = false
+            //     seal.visible = true
+            //     updatePasses()
+            // }, 2000)
+    
+            // Cheap seal scale
+            seal.visible = false
+            trickSealRight.visible = true
+            trickSealLeft.visible = true
+            tweenBounce.resume()
             // setInterval(() => {trickSealRight.scale += .02}, 10)
-
+            // setInterval (() => {
+            //     seal.visible = true
+            //     updatePasses()}, 2000)
         } else {
             // show failure, decrease pass count
         }
     }
-    
-    // function doAction0() {
-        // }
-        // function doAction1() {
-            // }
-            // let actionWords =['abcd', 'efgh', ...];
-            // let accumulatorString = '';
-            // let isDoingTrick = false;
-            // this.input.on('XYZ', function (event) {
-                //     if (isDoingTrick) {
-                    // 
-            // 
-            // event --> letter ('a', 'b',)
-            // letter = ...
-
-            // accumulatorString += letter
-            /* 
-            might be .equals() instead of ===
-            if (accumulatorString === actionWords[0]) {
-            doAction0();  
-            } else if(accumulatorString === actionWords[1]) {
-            doAction1();
-            } ...
-            */
-    //     }
-
-    // });
 
     }
 
