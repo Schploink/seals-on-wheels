@@ -1,5 +1,5 @@
-import Phaser from 'phaser';
-import MyGame from './scenes/my_game'
+// import Phaser from 'phaser';
+import MyGame from './scenes/my_game.js'
 // import config from './config/config'
 
 const config = {
