@@ -61,14 +61,14 @@ export default class MyGame extends Phaser.Scene
     trickSealRight.rotation = Math.PI/2
     trickSealRight.toggleFlipY()
     trickSealRight.toggleFlipX()
-    // trickSealRight.visible = false
+    trickSealRight.visible = false
 
     let trickSealLeft = this.add.follower(curve, 200, 250, 'seal');
     trickSealLeft.scale = 0.3
     trickSealLeft.rotation = Math.PI/2
     // trickSealLeft.toggleFlipY()
     trickSealLeft.toggleFlipX()
-    // trickSealLeft.visible = false
+    trickSealLeft.visible = false
 
 
     seal.startFollow({
@@ -126,6 +126,7 @@ export default class MyGame extends Phaser.Scene
     let matchText
     let trick
     let failText = this.add.text(165, 375, "", {fontFamily: "spray", fontSize: "184px", fill: "#FF0000"})
+    let sealRight = true
     
     function getWord() {
         return words[Math.floor(Math.random() * words.length)]
@@ -135,6 +136,10 @@ export default class MyGame extends Phaser.Scene
         matchTextInstruction.setText( "" )
         matchText = getWord()
         matchWord.setText( matchText )
+    }
+
+    function afterTrick() {
+        matchTextInstruction.setText( "match the word that appears here" )
     }
     
     function updateScore() {
@@ -147,17 +152,36 @@ export default class MyGame extends Phaser.Scene
         timerText.setText('Timer: ' + timer + "s")
     }
 
+    function timerReset() {
+        timer = 3
+        timerText.setText('Timer: ' + timer + "s")
+    }
+
     function updatePasses() {
         passes -= 1
         passText.setText('Remaining Passes: ' + passes)
     }
 
+    function resumeSeal() {
+        seal.visible = true
+        seal.resumeFollow();
+    }
+
     function wordFail() {
         failText.setText("BUMMER")
+        matchWord.setText("Get Ready")
         setTimeout(() => {
             failText.setText("")
+            timerReset()
         }, 500)
-        // play sound?
+        resumeSeal()
+    }
+
+    function wordSuccess() {
+        // Do a trick
+        // increase score
+        // Success message/sound?
+
     }
     
     function gameOver() {
@@ -204,7 +228,7 @@ export default class MyGame extends Phaser.Scene
         else
         {
             // trickSealRight.visible = false
-            // seal.visible = true
+            seal.visible = true
             seal.resumeFollow();
         }
         
@@ -217,6 +241,19 @@ export default class MyGame extends Phaser.Scene
     function beginTrick() {
         
         addMatchWord()
+
+        // determine which side to activate
+        if (passes % 2 === 0) {
+            seal.visible = false
+            trickSealRight.visible = true
+            updatePasses()
+        } else if (passes === 1) {
+        } else {
+            seal.visible = false
+            trickSealLeft.visible = true
+            updatePasses()
+        }
+
         const timeCounter = setInterval(() => {
             countDown()
             if (timer === 0) {
@@ -225,24 +262,13 @@ export default class MyGame extends Phaser.Scene
             }
         }, 1000)
 
-        if (passes % 2 === 0) {
-            // seal.visible = false
-            trickSealRight.visible = true
-            updatePasses()
-        } else {
-            // seal.visible = false
-            trickSealLeft.visible = true
-            updatePasses()
-        }
-
         text.addEventListener("input", (e) => {
             const insertedText = e.target.value;
-            console.log(insertedText)
-            console.log(matchText)
             if (insertedText === matchText) {
             
             e.target.value = "";
-            trick = true
+            clearInterval(timeCounter)
+            wordSuccess()
             }
         });    
     }
