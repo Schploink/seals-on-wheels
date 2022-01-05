@@ -61,14 +61,14 @@ export default class MyGame extends Phaser.Scene
     trickSealRight.rotation = Math.PI/2
     trickSealRight.toggleFlipY()
     trickSealRight.toggleFlipX()
-    trickSealRight.visible = false
+    // trickSealRight.visible = false
 
     let trickSealLeft = this.add.follower(curve, 200, 250, 'seal');
     trickSealLeft.scale = 0.3
     trickSealLeft.rotation = Math.PI/2
     // trickSealLeft.toggleFlipY()
     trickSealLeft.toggleFlipX()
-    trickSealLeft.visible = false
+    // trickSealLeft.visible = false
 
 
     seal.startFollow({
@@ -118,13 +118,14 @@ export default class MyGame extends Phaser.Scene
     let passes = 6
     let passText
     passText = this.add.text(16, 50, 'Remaining Passes: 6', { fontFamily: "spray", fontSize: '32px', fill: '#FFFFFF'})
-    let timer = 3.0
-    let timerText = this.add.text(16, 84, 'Timer: 3.0', { fontFamily: "spray", fontSize: '32px', fill: '#FFFFFF'})
+    let timer = 3
+    let timerText = this.add.text(16, 84, 'Timer: 3s', { fontFamily: "spray", fontSize: '32px', fill: '#FFFFFF'})
     let instructionText = this.add.text(250, 650, "Type the word that appears in the top right below", {fontFamily: "spray", fontSize: "24px"})
     let matchTextInstruction = this.add.text(550, 50, "match the word that appears here", {fontFamily: "spray", fontSize: "28px"})
     let matchWord = this.add.text(650, 50, "", {fontFamily: "spray", fontSize: "52px"})
     let matchText
     let trick
+    let failText = this.add.text(165, 375, "", {fontFamily: "spray", fontSize: "184px", fill: "#FF0000"})
     
     function getWord() {
         return words[Math.floor(Math.random() * words.length)]
@@ -141,17 +142,59 @@ export default class MyGame extends Phaser.Scene
         scoreText.setText('Score: ' + score)
     }
 
+    function countDown() {
+        timer--
+        timerText.setText('Timer: ' + timer + "s")
+    }
+
     function updatePasses() {
         passes -= 1
         passText.setText('Remaining Passes: ' + passes)
     }
+
+    function wordFail() {
+        failText.setText("BUMMER")
+        setTimeout(() => {
+            failText.setText("")
+        }, 500)
+        // play sound?
+    }
     
     function gameOver() {
         if (passes === 0) {
-
+            
         }
     }
     
+    // Seal 'Tricks'
+
+    function trickResolve () {
+
+    }
+
+    function bounceTrick() {
+        seal.visible = false
+        trickSealRight.visible = true
+        trickSealLeft.visible = true
+        tweenBounce.resume()
+        setInterval(() => {trickSealRight.scale += .02}, 10)
+        setTimeout (() => {
+            seal.visible = true
+            updatePasses()}, 
+            2000)
+    }
+
+    function rotateTrick() {
+        seal.visible = false
+        trickSealRight.visible = true
+        setInterval(() => {trickSealRight.rotation += .04}, 10)
+        setTimeout(() => {
+            trickSealRight.visible = false
+            seal.visible = true
+            updatePasses()}, 
+            2000)
+    }
+
     this.input.on('pointerdown', function () {
         
         if (seal.isFollowing())
@@ -169,27 +212,27 @@ export default class MyGame extends Phaser.Scene
 
     let text = document.getElementById("matchtext")
     text.focus()
-    // text.addEventListener("input", (e) => {
-    //     const insertedText = e.target.value;
-    //     console.log(insertedText)
-    //     console.log(matchText)
-    //     if (insertedText === matchText) {
 
-    //     e.target.value = "";
-    //     }
-    // });
-
-// conditional result based on 
+    // conditional result based on 
     function beginTrick() {
         
         addMatchWord()
+        const timeCounter = setInterval(() => {
+            countDown()
+            if (timer === 0) {
+                clearInterval(timeCounter)
+                wordFail()
+            }
+        }, 1000)
 
         if (passes % 2 === 0) {
-            seal.visible = false
+            // seal.visible = false
             trickSealRight.visible = true
+            updatePasses()
         } else {
-            seal.visible = false
+            // seal.visible = false
             trickSealLeft.visible = true
+            updatePasses()
         }
 
         text.addEventListener("input", (e) => {
@@ -199,35 +242,9 @@ export default class MyGame extends Phaser.Scene
             if (insertedText === matchText) {
             
             e.target.value = "";
+            trick = true
             }
-        });
-        // function where input success or fail sets trick to true or false
-        if ( trick = true ) {
-            updateScore()
-            // show success, perform trick, increase score, decrease pass count
-
-            // Trick seal rotation
-            // seal.visible = false
-            // trickSealRight.visible = true
-            // setInterval(() => {trickSealRight.rotation += .04}, 10)
-            // setTimeout(() => {
-            //     trickSealRight.visible = false
-            //     seal.visible = true
-            //     updatePasses()
-            // }, 2000)
-    
-            // Cheap seal scale
-            // seal.visible = false
-            // trickSealRight.visible = true
-            // trickSealLeft.visible = true
-            // tweenBounce.resume()
-            // setInterval(() => {trickSealRight.scale += .02}, 10)
-            // setTimeout (() => {
-            //     seal.visible = true
-            //     updatePasses()}, 2000)
-        } else {
-            // show failure, decrease pass count
-        }
+        });    
     }
 
     }
