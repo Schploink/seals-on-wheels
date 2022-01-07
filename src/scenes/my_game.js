@@ -113,6 +113,31 @@ export default class MyGame extends Phaser.Scene
         paused: true
     });
 
+    let outOfBody = this.tweens.add({
+        targets: [ trickSealRight, trickSealLeft],
+        x: '+=100',
+        y: '+=100',
+        duration: 750,
+        ease: 'Power2',
+        yoyo: true,
+        paused: true,
+        repeat: 2
+    });
+
+    // let flipz = this.tweens.addCounter({
+    //     from: 0,
+    //     to: 360,
+    //     duration: 750,
+    //     repeat: 2,
+    //     paused: true,
+    //     onUpdate: function (tween)
+    //     {
+    //         //  tween.getValue = range between 0 and 360
+
+    //         bar.setAngle(flipz.getValue());
+    //     }
+    // });
+
 
     
     function doYoyoTrick() {
@@ -218,7 +243,7 @@ export default class MyGame extends Phaser.Scene
     }
 
     function wordSuccess() {
-        rightTrick1()
+        sealTrick()
         trickResolve()
         updateScore()
         timerReset()
@@ -258,16 +283,43 @@ export default class MyGame extends Phaser.Scene
     }
 
     function rightTrick2() {
-        setInterval(() => {trickSealRight.rotation += .04}, 10)
+        // flipz.resume()
+        let sealTwirl = 
+            setInterval(() => {
+                trickSealRight.rotation += .04
+                trickSealLeft.rotation += .04}
+            , 10)
         setTimeout(() => {
-            trickSealRight.visible = false
-            seal.visible = true
-            updatePasses()}, 
-            2000)
+            clearInterval(sealTwirl)
+
+            trickSealRight.rotation = Math.PI/2
+            // trickSealRight.toggleFlipY()
+            // trickSealRight.toggleFlipX()
+
+            trickSealLeft.rotation = Math.PI/2
+            // trickSealLeft.toggleFlipX()
+
+        }, 3000)
+        // setTimeout(() => {
+        //     trickSealRight.visible = false
+        //     seal.visible = true
+        //     updatePasses()}, 
+        //     2000)
     }
 
     function rightTrick3() {
-        
+        outOfBody.resume()
+    }
+
+    function sealTrick() {
+        var i = Math.floor((Math.random()*20))%4
+        if (i === 0) {
+            i = Math.floor((Math.random()*20))%4
+            sealTrick()
+        } else {
+        eval('rightTrick'+i+'()')
+        console.log(i)
+        }
     }
 
     this.input.on('pointerdown', function () {
