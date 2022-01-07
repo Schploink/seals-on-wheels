@@ -258,8 +258,6 @@ export default class MyGame extends Phaser.Scene
     }
 
     function rightTrick2() {
-        seal.visible = false
-        trickSealRight.visible = true
         setInterval(() => {trickSealRight.rotation += .04}, 10)
         setTimeout(() => {
             trickSealRight.visible = false
