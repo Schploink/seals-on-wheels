@@ -299,7 +299,6 @@ export default class MyGame extends Phaser.Scene
             sealTrick()
         } else {
         eval('rightTrick'+i+'()')
-        console.log(i)
         }
     }
 
