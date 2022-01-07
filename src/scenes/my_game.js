@@ -78,14 +78,16 @@ export default class MyGame extends Phaser.Scene
     trickSealLeft.visible = false
 
     let startButton
-    startButton = this.add.text(500, 400, 'Start game')
+    startButton = this.add.text(500, 250, 'Play again')
         .setOrigin(0.5)
         .setPadding(10)
-        .setStyle({ backgroundColor: '#111' })
+        .setStyle({ backgroundColor: '#FF00FF' })
         .setInteractive({ useHandCursor: true })
         .on('pointerdown', () => this.scene.restart('gameScene'))
-        .on('pointerover', () => startButton.setStyle({ fill: '#f39c12' }))
+        .on('pointerover', () => startButton.setStyle({ fill: '#00FF00' }))
         .on('pointerout', () => startButton.setStyle({ fill: '#FFF' }))
+    
+    startButton.visible = false
 
     seal.startFollow({
         duration: 2000,
@@ -138,7 +140,7 @@ export default class MyGame extends Phaser.Scene
     let timer = 3
     let timerText = this.add.text(16, 84, 'Timer: 3s', { fontFamily: "spray", fontSize: '32px', fill: '#FFFFFF'})
     // match input area
-    let instructionText = this.add.text(250, 650, "Type the word that appears in the top right below", {fontFamily: "spray", fontSize: "24px"})
+    let instructionText = this.add.text(200, 650, "In the box below, type the word that appears in the top right", {fontFamily: "spray", fontSize: "24px"})
     // matched word area
     let matchTextInstruction = this.add.text(550, 50, "match the word that appears here", {fontFamily: "spray", fontSize: "28px"})
     let matchWord = this.add.text(650, 50, "", {fontFamily: "spray", fontSize: "52px"})
@@ -238,7 +240,7 @@ export default class MyGame extends Phaser.Scene
         clearInterval(timeCounter)
         gameOverText.setText("SICK, Homie!")
         matchWord.setText( `You got ${score} of 5!` )
-        // this.input.on('pointerdown', newGame())
+        startButton.visible = true
     }
 
     function newGame() {

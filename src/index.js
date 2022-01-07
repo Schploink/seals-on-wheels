@@ -14,9 +14,10 @@ const config = {
     // scene: MyGame
 };
 
+const game = new Phaser.Game(config);
+
 game.scene.add('titleScreen', titleScreen)
 game.scene.add('game', gameScene)
 
-const game = new Phaser.Game(config);
 
 game.scene.start('titleScreen')
