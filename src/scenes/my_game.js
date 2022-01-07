@@ -266,6 +266,10 @@ export default class MyGame extends Phaser.Scene
             2000)
     }
 
+    function rightTrick3() {
+        
+    }
+
     this.input.on('pointerdown', function () {
         
         if (seal.isFollowing())
