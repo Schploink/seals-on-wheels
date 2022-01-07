@@ -7,7 +7,7 @@ import halfPipe from '../assets/79-skate-or-die-dos-screenshot-half-pipe-stunts.
 export default class MyGame extends Phaser.Scene
 {
     constructor () {
-        super();
+        super({key: 'gameScene'});
     }
     
     preload () {
@@ -20,6 +20,10 @@ export default class MyGame extends Phaser.Scene
     
 
     create () {
+
+    // this.scene.pause()
+    // setTimeout(() => {this.scene.resume()}, 5500)
+    
     var points = [];
 
     const halfPipe = this.add.image(500, 375, 'halfpipe')
@@ -74,12 +78,12 @@ export default class MyGame extends Phaser.Scene
     trickSealLeft.visible = false
 
     let startButton
-    startButton = this.add.text(100, 100, 'Start game')
+    startButton = this.add.text(500, 400, 'Start game')
         .setOrigin(0.5)
         .setPadding(10)
         .setStyle({ backgroundColor: '#111' })
         .setInteractive({ useHandCursor: true })
-        // .on('pointerdown', gameOver())
+        .on('pointerdown', () => this.scene.restart('gameScene'))
         .on('pointerover', () => startButton.setStyle({ fill: '#f39c12' }))
         .on('pointerout', () => startButton.setStyle({ fill: '#FFF' }))
 
@@ -92,16 +96,6 @@ export default class MyGame extends Phaser.Scene
         onRepeat: doYoyoTrick,
         rotateToPath: true
     });
-
-    // trickSealRight.startFollow({
-    //     duration: 2000,
-    //     yoyo: true,
-    //     // onYoyo: flip,
-    //     repeat: -1,
-    //     onYoyo: doYoyoTrick,
-    //     onRepeat: doYoyoTrick,
-    //     rotateToPath: true
-    // });
 
     let tweenBounce = this.tweens.add({
         targets: [ trickSealRight, trickSealLeft ],
@@ -123,23 +117,7 @@ export default class MyGame extends Phaser.Scene
         paused: true,
         repeat: 2
     });
-
-    // let flipz = this.tweens.addCounter({
-    //     from: 0,
-    //     to: 360,
-    //     duration: 750,
-    //     repeat: 2,
-    //     paused: true,
-    //     onUpdate: function (tween)
-    //     {
-    //         //  tween.getValue = range between 0 and 360
-
-    //         bar.setAngle(flipz.getValue());
-    //     }
-    // });
-
-
-    
+   
     function doYoyoTrick() {
         
         seal.rotation += Math.PI
@@ -153,9 +131,9 @@ export default class MyGame extends Phaser.Scene
     let scoreText
     scoreText = this.add.text(16, 16, 'Score: 0', { fontFamily: "spray", fontSize: '32px', fill: '#FFFFFF'})
     // passes remaining
-    let passes = 6
+    let passes = 5
     let passText
-    passText = this.add.text(16, 50, 'Remaining Passes: 6', { fontFamily: "spray", fontSize: '32px', fill: '#FFFFFF'})
+    passText = this.add.text(16, 50, 'Remaining Passes: 5', { fontFamily: "spray", fontSize: '32px', fill: '#FFFFFF'})
     // timer variables
     let timer = 3
     let timerText = this.add.text(16, 84, 'Timer: 3s', { fontFamily: "spray", fontSize: '32px', fill: '#FFFFFF'})
@@ -224,7 +202,7 @@ export default class MyGame extends Phaser.Scene
     }
 
     function resumeAll() {
-        if (passes % 2 === 0) {
+        if (passes % 2 === 1) {
             resumeSealLeft() 
         } else {
             resumeSealRight()
@@ -259,12 +237,13 @@ export default class MyGame extends Phaser.Scene
     function gameOver() {
         clearInterval(timeCounter)
         gameOverText.setText("SICK, Homie!")
+        matchWord.setText( `You got ${score} of 5!` )
         // this.input.on('pointerdown', newGame())
     }
 
     function newGame() {
         timerReset()
-        passes = 6
+        passes = 5
         score = 0
     }
     
@@ -322,21 +301,22 @@ export default class MyGame extends Phaser.Scene
         }
     }
 
-    this.input.on('pointerdown', function () {
+    // this.input.on('pointerdown', function () {
         
-        if (seal.isFollowing())
-        {
-            seal.pauseFollow();
-            clearInterval(timeCounter)
-        }
-        else
-        {
-            // trickSealRight.visible = false
-            seal.visible = true
-            seal.resumeFollow();
-        }
+        // if (seal.isFollowing())
+        // {
+            // seal.pauseFollow();
+            // clearInterval(timeCounter)
+        // }
+        // else
+        // {
+        //     // trickSealRight.visible = false
+        //     seal.visible = true
+        //     seal.resumeFollow();
+        //     this.scene.resume(this.scene)
+        // }
         
-    });
+    // });
 
     let text = document.getElementById("matchtext")
     text.focus()
@@ -344,7 +324,7 @@ export default class MyGame extends Phaser.Scene
     // conditional result based on 
     function beginTrick() {
         
-        addMatchWord()
+        
         timeCounter = setInterval(() => {
             countDown()
             if (timer === 0) {
@@ -354,16 +334,18 @@ export default class MyGame extends Phaser.Scene
         }, 1000)
 
         // determine which side to activate
-        if (passes % 2 === 0) {
+        if (passes % 2 === 1) {
+            addMatchWord()
             seal.visible = false
             trickSealRight.visible = true
             updatePasses()
-        } else if (passes === 1) {
+        } else if (passes === 0) {
             seal.visible = false
             trickSealLeft.visible = true
-            updatePasses()
+            matchText = "akdhjhrign"
             gameOver()
         } else {
+            addMatchWord()
             seal.visible = false
             trickSealLeft.visible = true
             updatePasses()
