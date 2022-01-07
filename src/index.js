@@ -1,4 +1,4 @@
-// import Phaser from 'phaser';
+import Phaser from 'phaser';
 import MyGame from './scenes/my_game.js'
 import TitleScreen from './scenes/title_screen.js'
 // import config from './config/config'
