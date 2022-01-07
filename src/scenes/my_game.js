@@ -16,6 +16,9 @@ export default class MyGame extends Phaser.Scene
         this.load.image('halfpipe', halfPipe)
     }   
 
+    
+    
+
     create () {
     var points = [];
 
@@ -70,6 +73,15 @@ export default class MyGame extends Phaser.Scene
     trickSealLeft.toggleFlipX()
     trickSealLeft.visible = false
 
+    let startButton
+    startButton = this.add.text(100, 100, 'Start game')
+        .setOrigin(0.5)
+        .setPadding(10)
+        .setStyle({ backgroundColor: '#111' })
+        .setInteractive({ useHandCursor: true })
+        // .on('pointerdown', gameOver())
+        .on('pointerover', () => startButton.setStyle({ fill: '#f39c12' }))
+        .on('pointerout', () => startButton.setStyle({ fill: '#FFF' }))
 
     seal.startFollow({
         duration: 2000,
