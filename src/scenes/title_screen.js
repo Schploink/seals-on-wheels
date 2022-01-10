@@ -10,14 +10,17 @@ export default class MyGame extends Phaser.Scene
     }
 
     preload() {
+        // game.scale.pageAlignHorizontally = true;
+        // game.scale.pageAlignVertically = true;
+        // game.scale.refresh();
         this.load.image('seal', sealImg);
         this.load.image('logo', logoImg);
         this.load.image('halfpipe', halfPipe)
     }
 
     create() {
-      const halfPipe = this.add.image(500, 375, 'halfpipe')
-      halfPipe.scale = 2.5
+      // const halfPipe = this.add.image(500, 375, 'halfpipe')
+      // halfPipe.scale = 2.5
 
       let startButton
       startButton = this.add.text(500, 350, 'Start game')

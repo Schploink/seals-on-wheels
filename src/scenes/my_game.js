@@ -11,6 +11,9 @@ export default class MyGame extends Phaser.Scene
     }
     
     preload () {
+        // game.scale.pageAlignHorizontally = true;
+        // game.scale.pageAlignVertically = true;
+        // game.scale.refresh();
         this.load.image('seal', sealImg);
         this.load.image('logo', logoImg);
         this.load.image('halfpipe', halfPipe)
@@ -23,7 +26,6 @@ export default class MyGame extends Phaser.Scene
 
     // this.scene.pause()
     // setTimeout(() => {this.scene.resume()}, 5500)
-    
     var points = [];
 
     const halfPipe = this.add.image(500, 375, 'halfpipe')

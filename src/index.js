@@ -11,11 +11,15 @@ const config = {
     parent: 'phaser-example',
     width: 1000,
     height: 750,
+    backgroundColor: "#000000"
     // scene: MyGame
 };
 
 const game = new Phaser.Game(config);
 
+        // game.scale.pageAlignHorizontally = true;
+        // game.scale.pageAlignVertically = true;
+        // game.scale.refresh();
 game.scene.add('titleScreen', titleScreen)
 game.scene.add('game', gameScene)
 
