@@ -48,7 +48,7 @@ export default class MyGame extends Phaser.Scene
     // matched word area
     let matchTextInstruction = this.add.text(550, 50, "match the word that appears here", {fontSize: "24px"})
     let introTextInstruction = this.add.text(400, 20, "when Seal reaches an edge, you have 3 seconds to", {fontSize: "28px"})
-    let matchWord = this.add.text(650, 50, "", {fontSize: "52px"})
+    let matchWord = this.add.text(650, 50, "", {fontSize: "50px"})
       // clickButton() {
       //   this.scene.switch('gameScene')
       // }
