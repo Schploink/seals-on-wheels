@@ -59,7 +59,7 @@ export default class MyGame extends Phaser.Scene
     let words = [ "thing", "pizza", "hecks", "signs", "candy", "loops", "spout", "fishes",
         "havok", "radical", "bogus", "tubular", "bodacious", "righteous", "skater", "awesome",
         "cowabunga", "hella", "indie", "skate", "seals", "roundboi", "fishes", "beaches",
-        "seagull", "bingo", "hang ten", "skate or die", "sk8rseal", "seals rule", "punk rock"]
+        "seagull", "bingo", "hang ten", "sk8rseal", "seals rule", "punk rock"]
 
     let seal = this.add.follower(curve, 200, 250, 'seal');
     seal.scale = 0.3
@@ -80,7 +80,7 @@ export default class MyGame extends Phaser.Scene
     trickSealLeft.visible = false
 
     let startButton
-    startButton = this.add.text(500, 250, 'Play again')
+    startButton = this.add.text(500, 100, 'Play again?', {fontSize: '28px'})
         .setOrigin(0.5)
         .setPadding(10)
         .setStyle({ backgroundColor: '#FF00FF' })
@@ -142,16 +142,16 @@ export default class MyGame extends Phaser.Scene
     let timer = 3
     let timerText = this.add.text(16, 84, 'Timer: 3s', {  fontSize: '32px', fill: '#FFFFFF'})
     // match input area
-    let instructionText = this.add.text(200, 650, "In the box below, type the word that appears in the top right", { fontSize: "24px"})
+    // let instructionText = this.add.text(70, 650, "In the box below, type the word that appears in the top right", { fontSize: "24px"})
     // matched word area
-    let matchTextInstruction = this.add.text(550, 50, "match the word that appears here", { fontSize: "28px"})
-    let matchWord = this.add.text(650, 50, "", { fontSize: "52px"})
+    let matchTextInstruction = this.add.text(650, 75, "", { fontSize: "32px"})
+    let matchWord = this.add.text(650, 50, "Get Ready", { fontSize: "52px"})
     let matchText
 
     let trick
     let failText = this.add.text(165, 375, "", { fontSize: "184px", fill: "#FF0000"})
-    let yesText = this.add.text(285, 375, "", { fontSize: "184px", fill: "#FF00FF"})
-    let gameOverText = this.add.text(30, 375, "", { fontSize: "184px", fill: "#00FF00"})
+    let yesText = this.add.text(250, 375, "", { fontSize: "184px", fill: "#FF00FF"})
+    let gameOverText = this.add.text(30, 375, "", { fontSize: "144px", fill: "#00FF00"})
     let timeCounter
     let insertedText
 
@@ -241,7 +241,8 @@ export default class MyGame extends Phaser.Scene
     function gameOver() {
         clearInterval(timeCounter)
         gameOverText.setText("SICK, Homie!")
-        matchWord.setText( `You got ${score} of 5!` )
+        matchWord.setText("")
+        matchTextInstruction.setText( `You got ${score} of 5!` )
         startButton.visible = true
     }
 
