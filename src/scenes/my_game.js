@@ -57,9 +57,9 @@ export default class MyGame extends Phaser.Scene
     // graphics.fillStyle(0x00ff00, 1);
 
     let words = [ "thing", "pizza", "hecks", "signs", "candy", "loops", "spout", "fishes",
-        "havok", "radical", "bogus", "tubular", "bodacious", "rightous", "skater", "awesome",
+        "havok", "radical", "bogus", "tubular", "bodacious", "righteous", "skater", "awesome",
         "cowabunga", "hella", "indie", "skate", "seals", "roundboi", "fishes", "beaches",
-        "seagull", "bingo", "hang ten", "skate or die", "sk8rseal", "seals rule"]
+        "seagull", "bingo", "hang ten", "skate or die", "sk8rseal", "seals rule", "punk rock"]
 
     let seal = this.add.follower(curve, 200, 250, 'seal');
     seal.scale = 0.3
@@ -133,25 +133,25 @@ export default class MyGame extends Phaser.Scene
     // score info
     let score = 0
     let scoreText
-    scoreText = this.add.text(16, 16, 'Score: 0', { fontFamily: "spray", fontSize: '32px', fill: '#FFFFFF'})
+    scoreText = this.add.text(16, 16, 'Score: 0', {  fontSize: '32px', fill: '#FFFFFF'})
     // passes remaining
     let passes = 5
     let passText
-    passText = this.add.text(16, 50, 'Remaining Passes: 5', { fontFamily: "spray", fontSize: '32px', fill: '#FFFFFF'})
+    passText = this.add.text(16, 50, 'Remaining Passes: 5', {  fontSize: '32px', fill: '#FFFFFF'})
     // timer variables
     let timer = 3
-    let timerText = this.add.text(16, 84, 'Timer: 3s', { fontFamily: "spray", fontSize: '32px', fill: '#FFFFFF'})
+    let timerText = this.add.text(16, 84, 'Timer: 3s', {  fontSize: '32px', fill: '#FFFFFF'})
     // match input area
-    let instructionText = this.add.text(200, 650, "In the box below, type the word that appears in the top right", {fontFamily: "spray", fontSize: "24px"})
+    let instructionText = this.add.text(200, 650, "In the box below, type the word that appears in the top right", { fontSize: "24px"})
     // matched word area
-    let matchTextInstruction = this.add.text(550, 50, "match the word that appears here", {fontFamily: "spray", fontSize: "28px"})
-    let matchWord = this.add.text(650, 50, "", {fontFamily: "spray", fontSize: "52px"})
+    let matchTextInstruction = this.add.text(550, 50, "match the word that appears here", { fontSize: "28px"})
+    let matchWord = this.add.text(650, 50, "", { fontSize: "52px"})
     let matchText
 
     let trick
-    let failText = this.add.text(165, 375, "", {fontFamily: "spray", fontSize: "184px", fill: "#FF0000"})
-    let yesText = this.add.text(285, 375, "", {fontFamily: "spray", fontSize: "184px", fill: "#FF00FF"})
-    let gameOverText = this.add.text(30, 375, "", {fontFamily: "spray", fontSize: "184px", fill: "#00FF00"})
+    let failText = this.add.text(165, 375, "", { fontSize: "184px", fill: "#FF0000"})
+    let yesText = this.add.text(285, 375, "", { fontSize: "184px", fill: "#FF00FF"})
+    let gameOverText = this.add.text(30, 375, "", { fontSize: "184px", fill: "#00FF00"})
     let timeCounter
     let insertedText
 
