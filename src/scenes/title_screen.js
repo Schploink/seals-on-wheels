@@ -2,6 +2,9 @@ import Phaser from 'phaser';
 import logoImg from '../assets/logo.png';
 import sealImg from '../assets/Sealonwheels.png';
 import halfPipe from '../assets/79-skate-or-die-dos-screenshot-half-pipe-stunts.png'
+import linkedin from '../assets/linkedin.png'
+import github from '../assets/github.png'
+import angellist from '../assets/angellist.png'
 
 export default class MyGame extends Phaser.Scene
 {
@@ -16,6 +19,9 @@ export default class MyGame extends Phaser.Scene
         this.load.image('seal', sealImg);
         this.load.image('logo', logoImg);
         this.load.image('halfpipe', halfPipe)
+        this.load.image('linkedin', linkedin)
+        this.load.image('angellist', angellist)
+        this.load.image('github', github)
     }
 
     create() {
@@ -30,9 +36,29 @@ export default class MyGame extends Phaser.Scene
         .setPadding(10)
         .setStyle({ backgroundColor: '#FF00FF' })
         .setInteractive({ useHandCursor: true })
-        .on('pointerdown', () => this.scene.switch('gameScene'))
+        .on('pointerup', () => this.scene.switch('gameScene'))
         .on('pointerover', () => startButton.setStyle({ fill: '#00FF00' }))
         .on('pointerout', () => startButton.setStyle({ fill: '#FFF' }))
+
+      const back = this.add.rectangle(100, 50, 250, 60, 0xFF00FF)
+      const gitHub = this.add.image(50, 50, 'github')
+      gitHub.scale = 0.1
+      gitHub.setInteractive({ useHandCursor: true})
+      gitHub.on('pointerdown', () => {
+        window.open('https://github.com/Schploink/seals-on-wheels', "_blank")
+      })
+      const linkedIn = this.add.image(170, 50, 'linkedin')
+      linkedIn.scale = 0.1
+      linkedIn.setInteractive({ useHandCursor: true})
+      linkedIn.on('pointerdown', () => {
+        window.open('https://www.linkedin.com/in/kevin-oconnor-933561216/', "_blank")
+      })
+      const angelList = this.add.image(110, 50, 'angellist')
+      angelList.scale = 0.057
+      angelList.setInteractive({ useHandCursor: true})
+      angelList.on('pointerdown', () => {
+        window.open('https://angel.co/u/kevin-oconnor-7', "_blank")
+      })
 
 
     let score = 0
