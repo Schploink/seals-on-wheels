@@ -106,7 +106,7 @@ export default class MyGame extends Phaser.Scene
             window.open('https://github.com/Schploink/seals-on-wheels', "_blank")
         })
     const linkedIn = this.add.image(550, 650, 'linkedin')
-        linkedIn.scale = 0.1
+        linkedIn.scale = 0.10
         linkedIn.setInteractive({ useHandCursor: true})
         linkedIn.on('pointerdown', () => {
             window.open('https://www.linkedin.com/in/kevin-oconnor-933561216/', "_blank")
